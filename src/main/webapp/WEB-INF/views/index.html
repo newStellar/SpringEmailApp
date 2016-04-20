@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Send Email Application</title>
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class = "container jumbotron"> <h3>Spring-Boot Sending Email Application </h3> </div>
+<div class="container">
+
+    <p> Email:
+        <input id = "emailID" class="form-control" type="text" />
+    </p>
+    <p>
+        Message:
+        <textarea id ="msgID" class="form-control"></textarea>
+    </p>
+    <button class = "btn btn-success" onclick="sendEmail()"> Send email</button>
+</div>
+
+<script>
+
+    var sendEmail = function(){
+
+
+        var serverData = {
+
+            email:$("#emailID").val(),
+            msg:$("#msgID").val()
+        }
+        var sendable = JSON.stringify(serverData);
+
+
+
+        $.ajax({
+
+            method: "POST",
+            url: "/signup-success",
+            data: sendable,
+            dataType : "json",
+            contentType: "application/json; charset=utf-8",
+
+            success: function(data){
+
+                console.log(data);
+            },
+            error: function(data){
+
+                console.log(data.responseText);
+            }
+
+        });
+    }
+
+</script>
+</body>
+</html>
